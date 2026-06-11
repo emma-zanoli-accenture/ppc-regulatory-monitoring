@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-family: theme('fontFamily.sans');
+    /* Subtle control-tower atmosphere: a faint cool wash, not a flat fill. */
+    background-image:
+      radial-gradient(60rem 60rem at 110% -10%, rgb(21 183 158 / 0.06), transparent 60%),
+      radial-gradient(70rem 70rem at -10% 0%, rgb(15 76 129 / 0.07), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  /* Tabular figures for data / KPI surfaces. */
+  .font-mono {
+    font-feature-settings: 'tnum' 1;
+  }
+}
+
+@layer utilities {
+  /* Thin, unobtrusive scrollbars for panels and drawers. */
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(203 213 225) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background-color: rgb(203 213 225);
+    border-radius: 9999px;
+  }
+}
