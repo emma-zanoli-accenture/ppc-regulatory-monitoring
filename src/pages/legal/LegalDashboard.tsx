@@ -9,7 +9,7 @@ import {
   Layers,
   MessageSquare,
 } from 'lucide-react';
-import { KpiWidget, SectionCard, StatusBadge } from '../../components';
+import { KpiWidget, PageHeader, SectionCard, StatusBadge } from '../../components';
 import { useDemoStore } from '../../store/DemoStore';
 import {
   countActiveChanges,
@@ -70,22 +70,16 @@ export default function LegalDashboard() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-            Legal / Compliance
-          </p>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-            Compliance Dashboard
-          </h1>
-          <p className="mt-1 text-slate-500">
-            Control-tower view of monitored regulatory changes and their status.
-          </p>
-        </div>
-        <p className="hidden text-sm text-slate-400 sm:block">
-          As of <span className="font-mono text-slate-500">{formatDate(currentDate)}</span>
-        </p>
-      </div>
+      <PageHeader
+        crumbs={[{ label: 'Legal / Compliance' }, { label: 'Dashboard' }]}
+        title="Compliance Dashboard"
+        description="Control-tower view of monitored regulatory changes and their status."
+        meta={
+          <span className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 font-mono text-2xs text-slate-500">
+            AS OF {formatDate(currentDate)}
+          </span>
+        }
+      />
 
       {/* KPI row */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-6">

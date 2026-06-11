@@ -4,6 +4,7 @@ import { Activity, AlertTriangle, Check, Minus } from 'lucide-react';
 import {
   DataTable,
   KpiWidget,
+  PageHeader,
   SectionCard,
   Select,
   StatusBadge,
@@ -146,37 +147,29 @@ export default function Monitoring() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-            Legal / Compliance
-          </p>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-            Communication &amp; Follow-up Monitoring
-          </h1>
-          <p className="mt-1 text-slate-500">
-            Live status of {change?.title ?? 'the regulatory change'} across Business Units.
-          </p>
-        </div>
-        {change && (
-          <div className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-right shadow-card">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-              Implementation due
-            </p>
-            <p className="font-mono text-sm font-semibold text-slate-800">
-              {formatDate(change.implementationDueDate)}
-            </p>
-            <p
-              className={cn(
-                'text-xs',
-                dueDays < 0 ? 'text-red-600' : dueDays <= 14 ? 'text-amber-600' : 'text-slate-400',
-              )}
-            >
-              {dueDays < 0 ? `${Math.abs(dueDays)} days overdue` : `${dueDays} days remaining`}
-            </p>
-          </div>
-        )}
-      </div>
+      <PageHeader
+        crumbs={[{ label: 'Legal / Compliance' }, { label: 'Monitoring' }]}
+        title="Communication & Follow-up Monitoring"
+        description={`Live status of ${change?.title ?? 'the regulatory change'} across Business Units.`}
+        actions={
+          change ? (
+            <div className="rounded border border-slate-200 bg-white px-3 py-1.5 text-right">
+              <p className="label-eyebrow">Implementation due</p>
+              <p className="font-mono text-sm font-semibold text-slate-800">
+                {formatDate(change.implementationDueDate)}
+              </p>
+              <p
+                className={cn(
+                  'text-2xs',
+                  dueDays < 0 ? 'text-red-600' : dueDays <= 14 ? 'text-amber-600' : 'text-slate-400',
+                )}
+              >
+                {dueDays < 0 ? `${Math.abs(dueDays)} days overdue` : `${dueDays} days remaining`}
+              </p>
+            </div>
+          ) : undefined
+        }
+      />
 
       {/* Progress strip */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">

@@ -19,23 +19,23 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
-    'bg-brand-700 text-white shadow-sm hover:bg-brand-800 active:bg-brand-900 ' +
+    'bg-brand-700 text-white hover:bg-brand-800 active:bg-brand-900 ' +
     'focus-visible:ring-brand-600',
   secondary:
-    'bg-white text-slate-700 border border-slate-300 shadow-sm hover:bg-slate-50 ' +
+    'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 ' +
     'hover:border-slate-400 focus-visible:ring-brand-500',
   ghost:
     'bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900 ' +
     'focus-visible:ring-slate-400',
   danger:
-    'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800 ' +
+    'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 ' +
     'focus-visible:ring-red-500',
 };
 
 const SIZES: Record<ButtonSize, string> = {
-  sm: 'h-8 px-3 text-xs gap-1.5 rounded-lg',
-  md: 'h-10 px-4 text-sm gap-2 rounded-lg',
-  lg: 'h-11 px-5 text-sm gap-2 rounded-xl',
+  sm: 'h-7 px-2.5 text-xs gap-1.5 rounded',
+  md: 'h-9 px-3.5 text-[13px] gap-2 rounded',
+  lg: 'h-10 px-4 text-sm gap-2 rounded-md',
 };
 
 const ICON_SIZE: Record<ButtonSize, number> = { sm: 14, md: 16, lg: 18 };

@@ -14,6 +14,7 @@ import {
 import {
   Button,
   Card,
+  PageHeader,
   RiskBadge,
   SectionCard,
   Select,
@@ -185,11 +186,11 @@ export default function BuTicket() {
           Back to {change.title}
         </Button>
         <Card className="overflow-hidden">
-          <div className="flex flex-col items-center bg-gradient-to-br from-emerald-50 to-white px-6 py-10 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-md">
-              <CheckCircle2 size={28} />
+          <div className="flex flex-col items-center border-b border-emerald-200 bg-emerald-50/50 px-6 py-9 text-center">
+            <span className="flex h-12 w-12 items-center justify-center rounded-md border border-emerald-300 bg-white text-emerald-600">
+              <CheckCircle2 size={26} />
             </span>
-            <h2 className="mt-4 text-lg font-bold text-slate-900">
+            <h2 className="mt-3 text-base font-semibold text-slate-900">
               Compliance action submitted successfully
             </h2>
             <p className="mt-1 max-w-md text-sm text-slate-600">
@@ -246,27 +247,16 @@ export default function BuTicket() {
   /* ------------------------------- active view ------------------------------- */
   return (
     <div className="space-y-6">
-      <div className="space-y-4">
-        <Button
-          variant="ghost"
-          icon={ArrowLeft}
-          onClick={() => navigate(`/bu/regulatory-change/${change.id}`)}
-        >
-          Back to {change.title}
-        </Button>
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-              Business Unit · {ticket.businessUnit}
-            </p>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-              Compliance Ticket
-            </h1>
-            <p className="mt-1 text-slate-500">{change.title}</p>
-          </div>
-          <StatusBadge state={ticket.status} />
-        </div>
-      </div>
+      <PageHeader
+        crumbs={[
+          { label: `Business Unit · ${ticket.businessUnit}`, to: '/bu/dashboard' },
+          { label: 'Notification', to: `/bu/regulatory-change/${change.id}` },
+          { label: 'Compliance Ticket' },
+        ]}
+        title="Compliance Ticket"
+        description={change.title}
+        meta={<StatusBadge state={ticket.status} />}
+      />
 
       {/* Compliance measures */}
       <SectionCard

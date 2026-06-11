@@ -9,7 +9,7 @@ import {
   MessageSquare,
   Upload,
 } from 'lucide-react';
-import { KpiWidget, SectionCard, StatusBadge, Tag } from '../../components';
+import { KpiWidget, PageHeader, SectionCard, StatusBadge, Tag } from '../../components';
 import { useDemoStore } from '../../store/DemoStore';
 import { DEMO_BUSINESS_UNIT } from '../../config/navigation';
 import { COMPLETED_STATES } from '../../lib/metrics';
@@ -66,15 +66,11 @@ export default function BuDashboard() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-          Business Unit · {bu}
-        </p>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">My Dashboard</h1>
-        <p className="mt-1 text-slate-500">
-          Regulatory notifications assigned to {bu} and the actions you need to take.
-        </p>
-      </div>
+      <PageHeader
+        crumbs={[{ label: `Business Unit · ${bu}` }, { label: 'Dashboard' }]}
+        title="My Dashboard"
+        description={`Regulatory notifications assigned to ${bu} and the actions you need to take.`}
+      />
 
       {/* Widgets */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-6">

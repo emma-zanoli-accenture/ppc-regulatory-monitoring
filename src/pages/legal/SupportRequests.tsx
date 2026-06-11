@@ -6,7 +6,7 @@ import {
   MessageSquare,
   Send,
 } from 'lucide-react';
-import { Button, RiskBadge, SectionCard, SlideOver, Tag } from '../../components';
+import { Button, PageHeader, RiskBadge, SectionCard, SlideOver, Tag } from '../../components';
 import type { TagTone } from '../../components';
 import { useDemoStore } from '../../store/DemoStore';
 import { useToast } from '../../context/ToastContext';
@@ -59,16 +59,16 @@ export default function SupportRequests() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-          Legal / Compliance
-        </p>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Support Requests</h1>
-        <p className="mt-1 text-slate-500">
-          Second-level clarifications raised by Business Units.{' '}
-          <span className="font-medium text-slate-700">{openCount} open</span>.
-        </p>
-      </div>
+      <PageHeader
+        crumbs={[{ label: 'Legal / Compliance' }, { label: 'Support Requests' }]}
+        title="Support Requests"
+        description="Second-level clarifications raised by Business Units."
+        meta={
+          <span className="rounded-sm border border-slate-200 bg-slate-50 px-2 py-0.5 font-mono text-2xs text-slate-500">
+            {openCount} OPEN
+          </span>
+        }
+      />
 
       <SectionCard title="Clarifications" icon={MessageSquare} flushBody>
         {sorted.length === 0 ? (

@@ -6,20 +6,22 @@ import { DemoGuide } from './DemoGuide';
 /** Global top bar: brand mark, app title, and the prominent role switcher. */
 export function TopBar() {
   return (
-    <header className="sticky top-0 z-30 h-16 border-b border-slate-200 bg-white/85 backdrop-blur">
-      <div className="flex h-full items-center justify-between gap-4 px-6">
+    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
+      {/* Signature: a hairline teal accent rule along the very top. */}
+      <div className="h-0.5 accent-rule" />
+      <div className="flex h-[58px] items-center justify-between gap-4 px-5">
         <div className="flex items-center gap-3">
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold text-white shadow-sm"
+            className="flex h-8 w-8 items-center justify-center rounded text-[13px] font-bold text-white"
             style={{ backgroundColor: BRAND.primaryColor }}
           >
             {BRAND.shortName}
           </span>
           <div className="leading-tight">
-            <p className="text-sm font-semibold tracking-tight text-slate-900">
+            <p className="text-[13px] font-semibold tracking-tight text-slate-900">
               Regulatory Change Management
             </p>
-            <p className="text-xs text-slate-400">{BRAND.name}</p>
+            <p className="text-2xs text-slate-400">{BRAND.name}</p>
           </div>
         </div>
 

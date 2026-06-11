@@ -55,37 +55,35 @@ export function KpiWidget({
   return (
     <div
       className={cn(
-        'rounded-2xl border border-slate-200/80 bg-white p-5 shadow-card',
+        'rounded-md border border-slate-200 bg-white p-4 transition-colors hover:border-slate-300',
         className,
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-          {label}
-        </p>
+        <p className="label-eyebrow">{label}</p>
         {Icon && (
           <span
             className={cn(
-              'flex h-9 w-9 shrink-0 items-center justify-center rounded-xl',
+              'flex h-7 w-7 shrink-0 items-center justify-center rounded',
               ICON_TONE[tone],
             )}
           >
-            <Icon size={18} />
+            <Icon size={15} />
           </span>
         )}
       </div>
-      <div className="mt-3 flex items-end gap-2.5">
-        <span className="font-mono text-3xl font-semibold leading-none tracking-tight text-slate-900">
+      <div className="mt-2.5 flex items-end gap-2">
+        <span className="font-mono text-[26px] font-semibold leading-none tracking-tight text-slate-900">
           {value}
         </span>
         {trend && TrendIcon && (
           <span
             className={cn(
-              'mb-0.5 inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-xs font-semibold',
+              'mb-0.5 inline-flex items-center gap-0.5 rounded-sm px-1.5 py-0.5 text-2xs font-semibold',
               trendColor(trend),
             )}
           >
-            <TrendIcon size={12} />
+            <TrendIcon size={11} />
             {trend.value}
           </span>
         )}

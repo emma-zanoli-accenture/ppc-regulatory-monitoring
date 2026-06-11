@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { History, Network } from 'lucide-react';
 import {
   DataTable,
+  PageHeader,
   RiskBadge,
   SectionCard,
   Select,
@@ -191,16 +192,11 @@ export default function ImpactOverview() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-          Legal / Compliance
-        </p>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Impact Overview</h1>
-        <p className="mt-1 text-slate-500">
-          All monitored regulatory changes, their obligation mapping, and impact across Business
-          Units.
-        </p>
-      </div>
+      <PageHeader
+        crumbs={[{ label: 'Legal / Compliance' }, { label: 'Impact Overview' }]}
+        title="Impact Overview"
+        description="All monitored regulatory changes, their obligation mapping, and impact across Business Units."
+      />
 
       <SectionCard
         title="Regulatory Changes"

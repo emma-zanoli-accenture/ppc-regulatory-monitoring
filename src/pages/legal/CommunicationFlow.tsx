@@ -25,6 +25,7 @@ import {
   Button,
   Card,
   DataTable,
+  PageHeader,
   RiskBadge,
   SectionCard,
   Tag,
@@ -273,24 +274,17 @@ function CommunicationWizard({ change, obligations, impacts }: WizardProps) {
   /* --------------------------------- views --------------------------------- */
 
   const header = (
-    <div className="space-y-4">
-      <Button
-        variant="ghost"
-        icon={ArrowLeft}
-        onClick={() => navigate(`/legal/regulatory-change/${change.id}`)}
-      >
-        Back to detail
-      </Button>
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-            Communication Report
-          </p>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">{change.title}</h1>
-        </div>
-        <Stepper step={step} />
-      </div>
-    </div>
+    <PageHeader
+      crumbs={[
+        { label: 'Legal / Compliance' },
+        { label: 'Impact Overview', to: '/legal/impact-overview' },
+        { label: change.id, to: `/legal/regulatory-change/${change.id}` },
+        { label: 'Communication Report' },
+      ]}
+      title={change.title}
+      description="Communication report generation"
+      actions={<Stepper step={step} />}
+    />
   );
 
   if (step === 'generating') {
@@ -344,11 +338,11 @@ function CommunicationWizard({ change, obligations, impacts }: WizardProps) {
       <div className="space-y-6">
         {header}
         <Card className="overflow-hidden">
-          <div className="flex flex-col items-center bg-gradient-to-br from-accent-50 to-white px-6 py-10 text-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-500 text-white shadow-md">
-              <CheckCircle2 size={28} />
+          <div className="flex flex-col items-center border-b border-accent-200 bg-accent-50/50 px-6 py-9 text-center">
+            <span className="flex h-12 w-12 items-center justify-center rounded-md border border-accent-300 bg-white text-accent-600">
+              <CheckCircle2 size={26} />
             </span>
-            <h2 className="mt-4 text-lg font-bold text-slate-900">
+            <h2 className="mt-3 text-base font-semibold text-slate-900">
               Communication successfully sent
             </h2>
             <p className="mt-1 max-w-md text-sm text-slate-600">

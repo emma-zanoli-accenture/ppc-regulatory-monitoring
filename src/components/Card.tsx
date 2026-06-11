@@ -9,14 +9,14 @@ export interface CardProps {
   interactive?: boolean;
 }
 
-/** Clean surface container. */
+/** Flat surface defined by a hairline border — no resting shadow. */
 export function Card({ className, children, interactive }: CardProps) {
   return (
     <div
       className={cn(
-        'rounded-2xl border border-slate-200/80 bg-white shadow-card',
+        'rounded-md border border-slate-200 bg-white',
         interactive &&
-          'transition-shadow duration-200 hover:shadow-card-hover cursor-pointer',
+          'cursor-pointer transition-colors duration-150 hover:border-slate-300 hover:bg-slate-50/40',
         className,
       )}
     >
@@ -60,33 +60,34 @@ export function SectionCard({
   return (
     <Card className={cn('overflow-hidden', className)}>
       {hasHeader && (
-        <div className="flex items-start justify-between gap-4 px-5 py-4 border-b border-slate-100">
-          <div className="flex items-start gap-3 min-w-0">
+        <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-4 py-3">
+          <div className="flex min-w-0 items-center gap-2.5">
             {Icon && (
               <span
                 className={cn(
-                  'mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl',
+                  'flex h-7 w-7 shrink-0 items-center justify-center rounded border',
+                  iconTone === 'brand' && 'border-brand-200/70',
+                  iconTone === 'accent' && 'border-accent-200/70',
+                  iconTone === 'neutral' && 'border-slate-200',
                   ICON_TONE[iconTone],
                 )}
               >
-                <Icon size={18} />
+                <Icon size={15} />
               </span>
             )}
             <div className="min-w-0">
               {title && (
-                <h3 className="text-[15px] font-semibold tracking-tight text-slate-900 truncate">
+                <h3 className="truncate text-sm font-semibold tracking-tight text-slate-900">
                   {title}
                 </h3>
               )}
-              {description && (
-                <p className="mt-0.5 text-sm text-slate-500">{description}</p>
-              )}
+              {description && <p className="mt-0.5 text-xs text-slate-500">{description}</p>}
             </div>
           </div>
           {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
         </div>
       )}
-      <div className={cn(!flushBody && 'p-5')}>{children}</div>
+      <div className={cn(!flushBody && 'p-4')}>{children}</div>
     </Card>
   );
 }

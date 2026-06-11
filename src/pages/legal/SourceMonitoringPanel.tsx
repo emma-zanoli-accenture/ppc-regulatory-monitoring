@@ -106,14 +106,12 @@ export function SourceMonitoringPanel() {
       <div className="grid gap-5 lg:grid-cols-2">
         {/* Monitored sources */}
         <div>
-          <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
-            Monitored Sources
-          </p>
+          <p className="label-eyebrow mb-2.5">Monitored Sources</p>
           <ul className="space-y-2">
             {MONITORED_SOURCES.map((src) => (
               <li
                 key={src.id}
-                className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/60 px-3 py-2.5"
+                className="flex items-center gap-3 rounded border border-slate-200 bg-slate-50/60 px-3 py-2"
               >
                 <span className="relative flex h-2.5 w-2.5 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-60" />
@@ -131,9 +129,7 @@ export function SourceMonitoringPanel() {
 
         {/* Scan result / catalogue */}
         <div className="flex flex-col">
-          <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
-            Detection
-          </p>
+          <p className="label-eyebrow mb-2.5">Detection</p>
 
           {scanning && (
             <AIThinkingIndicator
@@ -156,11 +152,11 @@ export function SourceMonitoringPanel() {
             <div className="space-y-3 animate-fade-in">
               <button
                 onClick={() => navigate(`/legal/regulatory-change/${remit.id}`)}
-                className="group w-full rounded-xl border border-accent-200 bg-gradient-to-br from-accent-50 to-white p-4 text-left transition-shadow hover:shadow-card-hover"
+                className="group w-full rounded border border-accent-200 bg-accent-50/50 p-3.5 text-left transition-colors hover:bg-accent-50"
               >
-                <div className="flex items-center gap-2 text-accent-700">
-                  <BadgeCheck size={16} />
-                  <span className="text-xs font-semibold uppercase tracking-wider">
+                <div className="flex items-center gap-1.5 text-accent-700">
+                  <BadgeCheck size={14} />
+                  <span className="text-2xs font-semibold uppercase tracking-[0.08em]">
                     1 new relevant regulation detected
                   </span>
                 </div>
@@ -192,21 +188,19 @@ export function SourceMonitoringPanel() {
       </div>
 
       {/* Source catalogue list */}
-      <div className="mt-5 border-t border-slate-100 pt-4">
-        <p className="mb-2.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
-          Source Catalogue
-        </p>
-        <ul className="space-y-1.5">
+      <div className="mt-5 border-t border-slate-200 pt-4">
+        <p className="label-eyebrow mb-2.5">Source Catalogue</p>
+        <ul className="space-y-1">
           {catalogueChanges.map((c) => {
             const isNew = c.id === REMIT_II_ID;
             return (
               <li
                 key={c.id}
                 className={cn(
-                  'flex items-center gap-3 rounded-lg px-3 py-2 text-sm',
+                  'flex items-center gap-3 rounded border px-3 py-2 text-sm',
                   isNew
-                    ? 'border border-accent-200 bg-accent-50/60 animate-fade-in'
-                    : 'bg-slate-50/60',
+                    ? 'border-accent-200 bg-accent-50/60 animate-fade-in'
+                    : 'border-slate-200 bg-slate-50/60',
                 )}
               >
                 <CheckCircle2

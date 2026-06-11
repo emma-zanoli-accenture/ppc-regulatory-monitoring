@@ -11,26 +11,46 @@ body,
 @layer base {
   body {
     margin: 0;
-    @apply bg-slate-50 text-slate-900 antialiased;
+    /* Committed cool-neutral surface — flat, no gradient wash. */
+    @apply bg-slate-100 text-slate-900 antialiased;
     font-family: theme('fontFamily.sans');
-    /* Subtle control-tower atmosphere: a faint cool wash, not a flat fill. */
-    background-image:
-      radial-gradient(60rem 60rem at 110% -10%, rgb(21 183 158 / 0.06), transparent 60%),
-      radial-gradient(70rem 70rem at -10% 0%, rgb(15 76 129 / 0.07), transparent 55%);
-    background-attachment: fixed;
+    font-feature-settings: 'cv05' 1; /* IBM Plex Sans: single-storey a, calmer */
+    letter-spacing: -0.006em;
   }
 
-  /* Tabular figures for data / KPI surfaces. */
+  /* Tabular, slightly tightened numerals for data / audit surfaces. */
   .font-mono {
-    font-feature-settings: 'tnum' 1;
+    font-feature-settings: 'tnum' 1, 'zero' 1;
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible, consistent keyboard-focus ring (not on mouse clicks). */
+  :focus-visible {
+    outline: 2px solid theme('colors.brand.600');
+    outline-offset: 1px;
+  }
+
+  ::selection {
+    background-color: theme('colors.brand.700');
+    color: white;
   }
 }
 
 @layer utilities {
+  /* The signature: a hairline teal accent rule. */
+  .accent-rule {
+    background-image: linear-gradient(
+      90deg,
+      theme('colors.accent.500'),
+      theme('colors.accent.500') 35%,
+      transparent
+    );
+  }
+
   /* Thin, unobtrusive scrollbars for panels and drawers. */
   .scrollbar-slim {
     scrollbar-width: thin;
-    scrollbar-color: rgb(203 213 225) transparent;
+    scrollbar-color: rgb(148 163 184) transparent;
   }
   .scrollbar-slim::-webkit-scrollbar {
     width: 8px;
@@ -39,5 +59,10 @@ body,
   .scrollbar-slim::-webkit-scrollbar-thumb {
     background-color: rgb(203 213 225);
     border-radius: 9999px;
+  }
+
+  /* Uppercase micro-label used across the dense UI. */
+  .label-eyebrow {
+    @apply text-2xs font-semibold uppercase tracking-[0.08em] text-slate-500;
   }
 }

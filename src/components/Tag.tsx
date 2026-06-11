@@ -11,17 +11,15 @@ export type TagTone =
   | 'brand'
   | 'accent';
 
+// Muted, restrained tones (kept in step with the workflow tone tokens).
 const TONE_STYLES: Record<TagTone, { badge: string; dot: string }> = {
-  neutral: { badge: 'bg-slate-100 text-slate-600 border-slate-200', dot: 'text-slate-400' },
-  info: { badge: 'bg-blue-50 text-blue-700 border-blue-200', dot: 'text-blue-500' },
-  success: {
-    badge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    dot: 'text-emerald-500',
-  },
-  warning: { badge: 'bg-amber-50 text-amber-700 border-amber-200', dot: 'text-amber-500' },
+  neutral: { badge: 'bg-slate-100 text-slate-600 border-slate-300/70', dot: 'text-slate-400' },
+  info: { badge: 'bg-brand-50 text-brand-700 border-brand-200', dot: 'text-brand-500' },
+  success: { badge: 'bg-emerald-50 text-emerald-700 border-emerald-200', dot: 'text-emerald-600' },
+  warning: { badge: 'bg-amber-50 text-amber-800 border-amber-200', dot: 'text-amber-500' },
   danger: { badge: 'bg-red-50 text-red-700 border-red-200', dot: 'text-red-500' },
-  brand: { badge: 'bg-brand-50 text-brand-700 border-brand-100', dot: 'text-brand-500' },
-  accent: { badge: 'bg-accent-50 text-accent-700 border-accent-200', dot: 'text-accent-500' },
+  brand: { badge: 'bg-brand-50 text-brand-700 border-brand-200', dot: 'text-brand-500' },
+  accent: { badge: 'bg-accent-50 text-accent-700 border-accent-200', dot: 'text-accent-600' },
 };
 
 export interface TagProps {

@@ -19,6 +19,9 @@ export type { SelectProps, SelectOption } from './Select';
 export { Card, SectionCard } from './Card';
 export type { CardProps, SectionCardProps } from './Card';
 
+export { PageHeader } from './PageHeader';
+export type { PageHeaderProps, Crumb } from './PageHeader';
+
 export { DataTable } from './DataTable';
 export type { DataTableProps, Column } from './DataTable';
 

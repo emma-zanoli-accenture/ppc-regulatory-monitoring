@@ -1,4 +1,4 @@
-import { Sparkles } from 'lucide-react';
+import { Cpu } from 'lucide-react';
 import { cn } from '../lib/cn';
 
 export type ThinkingVariant = 'dots' | 'inline' | 'panel';
@@ -12,30 +12,38 @@ export interface AIThinkingIndicatorProps {
   className?: string;
 }
 
-/** Three staggered bouncing dots (shared by all variants). */
+/** Three dots fading in sequence — understated, no bounce. */
 function Dots({ className }: { className?: string }) {
   return (
     <span className={cn('inline-flex items-center gap-1', className)}>
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="h-1.5 w-1.5 rounded-full bg-current animate-thinking-bounce"
-          style={{ animationDelay: `${i * 0.16}s` }}
+          className="h-1 w-1 rounded-full bg-current animate-pulse-soft"
+          style={{ animationDelay: `${i * 0.18}s` }}
         />
       ))}
     </span>
   );
 }
 
-/** A shimmering placeholder bar — reads as "content is being generated". */
+/** A thin determinate-looking progress track with a sweeping head. */
+function SweepBar({ className }: { className?: string }) {
+  return (
+    <div className={cn('relative h-0.5 overflow-hidden rounded-full bg-slate-200', className)}>
+      <div className="absolute inset-y-0 left-0 w-1/4 animate-sweep rounded-full bg-accent-500" />
+    </div>
+  );
+}
+
+/** A shimmering placeholder line — reads as "content is being generated". */
 function ShimmerBar({ className }: { className?: string }) {
   return (
-    <div className={cn('relative overflow-hidden rounded-full bg-slate-100', className)}>
+    <div className={cn('relative overflow-hidden rounded-sm bg-slate-100', className)}>
       <div
         className="absolute inset-0 -translate-x-full animate-shimmer"
         style={{
-          background:
-            'linear-gradient(90deg, transparent, rgb(255 255 255 / 0.9), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgb(255 255 255 / 0.85), transparent)',
         }}
       />
     </div>
@@ -43,10 +51,11 @@ function ShimmerBar({ className }: { className?: string }) {
 }
 
 /**
- * Animated "agent is working" indicator used to make scripted AI moments feel live.
- * - `dots`   : just the bouncing dots (inline within text).
- * - `inline` : a sparkle icon + label + dots on one row (buttons, headers).
- * - `panel`  : a full card with a pulsing AI orb, label, and shimmer lines.
+ * "Agent working" indicator — engineered, not flashy.
+ * - `dots`   : sequence-fading dots, inline within text.
+ * - `inline` : a small bordered chip with a processor mark, label, and dots.
+ * - `panel`  : a hairline tile with a mono status line, a thin sweep bar, and
+ *              shimmer placeholder lines.
  */
 export function AIThinkingIndicator({
   variant = 'inline',
@@ -62,41 +71,36 @@ export function AIThinkingIndicator({
     return (
       <span
         className={cn(
-          'inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-3 py-1.5 text-sm font-medium text-brand-700',
+          'inline-flex items-center gap-2 rounded border border-slate-300 bg-white px-2.5 py-1 text-[13px] font-medium text-slate-700',
           className,
         )}
       >
-        <Sparkles size={15} className="text-accent-600" />
+        <Cpu size={14} className="text-accent-600" />
         {label}
-        <Dots className="text-brand-500" />
+        <Dots className="text-accent-500" />
       </span>
     );
   }
 
   // panel
   return (
-    <div
-      className={cn(
-        'flex items-center gap-4 rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-50 to-white p-5',
-        className,
-      )}
-    >
-      <span className="relative flex h-12 w-12 shrink-0 items-center justify-center">
-        <span className="absolute inset-0 rounded-full bg-accent-400/40 animate-pulse-ring" />
-        <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-md">
-          <Sparkles size={20} />
+    <div className={cn('rounded-md border border-slate-300 bg-white', className)}>
+      <div className="flex items-center gap-3 px-4 py-3.5">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded border border-brand-200 bg-brand-50 text-brand-700">
+          <Cpu size={18} />
         </span>
-      </span>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <p className="text-sm font-semibold text-slate-900">{label}</p>
-          <Dots className="text-brand-500" />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <p className="font-mono text-[13px] font-medium text-slate-900">{label}</p>
+            <Dots className="text-accent-500" />
+          </div>
+          {sublabel && <p className="mt-0.5 text-xs text-slate-500">{sublabel}</p>}
         </div>
-        {sublabel && <p className="mt-0.5 text-xs text-slate-500">{sublabel}</p>}
-        <div className="mt-3 space-y-1.5">
-          <ShimmerBar className="h-2 w-full" />
-          <ShimmerBar className="h-2 w-4/5" />
-        </div>
+      </div>
+      <SweepBar />
+      <div className="space-y-1.5 px-4 py-3">
+        <ShimmerBar className="h-2 w-full" />
+        <ShimmerBar className="h-2 w-3/4" />
       </div>
     </div>
   );

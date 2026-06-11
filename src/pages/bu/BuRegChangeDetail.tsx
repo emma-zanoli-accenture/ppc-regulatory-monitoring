@@ -22,6 +22,7 @@ import {
   Button,
   Card,
   Modal,
+  PageHeader,
   SectionCard,
   Select,
   SlideOver,
@@ -188,23 +189,15 @@ export default function BuRegChangeDetail() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="space-y-4">
-        <Button variant="ghost" icon={ArrowLeft} onClick={() => navigate('/bu/dashboard')}>
-          Back to Dashboard
-        </Button>
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-              Business Unit · {bu}
-            </p>
-            <h1 className="mt-0.5 text-2xl font-bold tracking-tight text-slate-900">
-              {change.title}
-            </h1>
-            <p className="mt-1 text-slate-500">{change.regulatorySource}</p>
-          </div>
-          {ticket && <StatusBadge state={ticket.status} />}
-        </div>
-      </div>
+      <PageHeader
+        crumbs={[
+          { label: `Business Unit · ${bu}`, to: '/bu/dashboard' },
+          { label: 'Notification' },
+        ]}
+        title={change.title}
+        description={change.regulatorySource}
+        meta={ticket ? <StatusBadge state={ticket.status} /> : undefined}
+      />
 
       {/* Four questions */}
       <div className="grid gap-4 lg:grid-cols-2">
@@ -355,10 +348,10 @@ export default function BuRegChangeDetail() {
         <div className="grid gap-4 lg:grid-cols-2">
           <button
             onClick={() => setChatOpen(true)}
-            className="group flex items-center gap-3 rounded-xl border border-accent-200 bg-gradient-to-br from-accent-50 to-white p-4 text-left transition-shadow hover:shadow-card-hover"
+            className="group flex items-center gap-3 rounded border border-accent-200 bg-accent-50/50 p-3.5 text-left transition-colors hover:bg-accent-50"
           >
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 text-white">
-              <Sparkles size={20} />
+            <span className="flex h-10 w-10 items-center justify-center rounded bg-brand-700 text-white">
+              <Sparkles size={18} />
             </span>
             <div className="min-w-0 flex-1">
               <p className="flex items-center gap-2 text-sm font-semibold text-slate-900">
@@ -377,10 +370,10 @@ export default function BuRegChangeDetail() {
           <button
             onClick={() => setSupportOpen(true)}
             disabled={!ticket}
-            className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 text-left transition-shadow hover:shadow-card-hover disabled:cursor-not-allowed disabled:opacity-60"
+            className="group flex items-center gap-3 rounded border border-slate-200 bg-white p-3.5 text-left transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-              <MessageSquare size={20} />
+            <span className="flex h-10 w-10 items-center justify-center rounded bg-slate-100 text-slate-600">
+              <MessageSquare size={18} />
             </span>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-slate-900">Request Legal Support</p>

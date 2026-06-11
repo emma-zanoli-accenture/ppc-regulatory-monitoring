@@ -25,6 +25,7 @@ import {
   Button,
   Card,
   DataTable,
+  PageHeader,
   SectionCard,
   Tag,
   Timeline,
@@ -266,22 +267,16 @@ export default function Audit() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-accent-600">
-            Legal / Compliance
-          </p>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-            Audit &amp; Regulatory Reporting
-          </h1>
-          <p className="mt-1 text-slate-500">
-            End-to-end evidence and audit readiness for {change.title}.
-          </p>
-        </div>
-        <Tag tone={finalStatus.tone} withDot>
-          {finalStatus.label}
-        </Tag>
-      </div>
+      <PageHeader
+        crumbs={[{ label: 'Legal / Compliance' }, { label: 'Audit & Reporting' }]}
+        title="Audit & Regulatory Reporting"
+        description={`End-to-end evidence and audit readiness for ${change.title}.`}
+        meta={
+          <Tag tone={finalStatus.tone} withDot>
+            {finalStatus.label}
+          </Tag>
+        }
+      />
 
       {/* Per-BU audit table */}
       <SectionCard title="Per-Business-Unit Audit View" icon={Building2} flushBody>

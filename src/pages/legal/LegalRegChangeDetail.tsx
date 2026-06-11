@@ -14,6 +14,7 @@ import {
   Button,
   Card,
   DataTable,
+  PageHeader,
   RiskBadge,
   SectionCard,
   Tag,
@@ -119,30 +120,21 @@ export default function LegalRegChangeDetail() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="space-y-4">
-        <Button
-          variant="ghost"
-          icon={ArrowLeft}
-          onClick={() => navigate('/legal/impact-overview')}
-        >
-          Impact Overview
-        </Button>
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-xs text-slate-400">{change.id}</span>
-              <RiskBadge level={change.riskPriority} size="sm" suffix="Risk" />
-            </div>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900">
-              {change.title}
-            </h1>
-            <p className="mt-1 text-slate-500">{change.regulatorySource}</p>
-          </div>
+      <PageHeader
+        crumbs={[
+          { label: 'Legal / Compliance' },
+          { label: 'Impact Overview', to: '/legal/impact-overview' },
+          { label: change.id },
+        ]}
+        title={change.title}
+        description={change.regulatorySource}
+        meta={<RiskBadge level={change.riskPriority} size="sm" suffix="Risk" />}
+        actions={
           <Button icon={Send} size="lg" onClick={handleGenerateReport}>
             Generate Communication Report
           </Button>
-        </div>
-      </div>
+        }
+      />
 
       {/* Regulatory Overview */}
       <SectionCard title="Regulatory Overview" icon={FileText}>
