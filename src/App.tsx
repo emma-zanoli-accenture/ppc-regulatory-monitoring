@@ -13,6 +13,7 @@ import CommunicationFlow from './pages/legal/CommunicationFlow';
 import Monitoring from './pages/legal/Monitoring';
 import SupportRequests from './pages/legal/SupportRequests';
 import Audit from './pages/legal/Audit';
+import AiTools from './pages/legal/AiTools';
 // Business Unit pages
 import BuDashboard from './pages/bu/BuDashboard';
 import BuRegChangeDetail from './pages/bu/BuRegChangeDetail';
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/legal/monitoring" element={<Monitoring />} />
           <Route path="/legal/support-requests" element={<SupportRequests />} />
           <Route path="/legal/audit" element={<Audit />} />
+          <Route path="/legal/ai-tools" element={<AiTools />} />
 
           {/* Business Unit */}
           <Route path="/bu/dashboard" element={<BuDashboard />} />

@@ -8,6 +8,7 @@ import {
   Network,
   Scale,
   ShieldCheck,
+  Sparkles,
   Ticket,
 } from 'lucide-react';
 import type { Role } from '../context/RoleContext';
@@ -63,6 +64,7 @@ export const NAV_ITEMS: Record<Role, NavItem[]> = {
     { label: 'Monitoring', to: '/legal/monitoring', icon: Activity },
     { label: 'Support Requests', to: '/legal/support-requests', icon: MessageSquare },
     { label: 'Audit & Reporting', to: '/legal/audit', icon: ShieldCheck },
+    { label: 'AI Tools', to: '/legal/ai-tools', icon: Sparkles },
   ],
   bu: [
     { label: 'My Dashboard', to: '/bu/dashboard', icon: LayoutDashboard, end: true },
