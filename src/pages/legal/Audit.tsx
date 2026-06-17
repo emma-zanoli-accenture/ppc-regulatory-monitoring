@@ -260,7 +260,7 @@ export default function Audit() {
   const exportReport = () =>
     toast({
       title: 'Audit report exported',
-      description: 'Regulatory Compliance & Audit Report saved (demo).',
+      description: 'Regulatory Implementation Report saved (demo).',
       variant: 'success',
     });
 
@@ -308,7 +308,7 @@ export default function Audit() {
 
       {/* Report generation */}
       <SectionCard
-        title="Regulatory Compliance & Audit Report"
+        title="Regulatory Implementation Report"
         icon={ShieldCheck}
         iconTone="accent"
         actions={
@@ -337,7 +337,7 @@ export default function Audit() {
           <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 px-6 py-12 text-center">
             <ShieldCheck size={24} className="text-slate-300" />
             <p className="mt-2 text-sm text-slate-400">
-              Generate a consolidated compliance &amp; audit report from the live store data.
+              Generate a consolidated regulatory implementation report from the live store data.
             </p>
           </div>
         )}

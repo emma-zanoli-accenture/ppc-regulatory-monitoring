@@ -143,7 +143,7 @@ const STEPS: GuideStep[] = [
     role: 'legal',
     text: 'Audit & Regulatory Reporting + export',
     detail:
-      'Open Audit for the end-to-end timeline and evidence repository, then generate and export the consolidated compliance & audit report.',
+      'Open Audit for the end-to-end timeline and evidence repository, then generate and export the consolidated regulatory implementation report.',
   },
 ];
 
