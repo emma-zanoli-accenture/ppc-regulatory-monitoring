@@ -106,7 +106,7 @@ const STEPS: GuideStep[] = [
     role: 'legal',
     text: 'Simulate T‑30 reminder',
     detail:
-      'Open Demo Controls (top bar) and jump to T‑30 to fire reminders to both roles and shift every countdown.',
+      'Stay on Legal → Monitoring. Open Demo Controls (top bar) → click "T‑30 days". The demo clock jumps to 31 Aug 2026; a reminder toast fires; and the "Days remaining" column for every BU instantly drops to 30. Switch to Audit to show the System-generated "Reminder issued" entry — proof the system tracks the clock automatically, no human needed.',
   },
   {
     n: 14,
@@ -133,9 +133,9 @@ const STEPS: GuideStep[] = [
   {
     n: 17,
     role: 'legal',
-    text: 'Monitoring shows Completed',
+    text: 'Monitoring shows Ready for Audit',
     detail:
-      'Switch to Legal → Monitoring to see the BU\'s status update to completed live, with no escalations.',
+      'Switch to Legal → Monitoring. The BU\'s row now shows "Ready for Audit" in Action Status and a dash (—) in Days to Due — countdown pressure gone. Point to the KPI strip: Completed ticks up, Escalated stays at 0. That\'s the punchline: proactive reminders worked, nothing escalated, Legal sees it all in real time with no manual reporting.',
     phaseStart: 'Switch → Legal',
   },
   {

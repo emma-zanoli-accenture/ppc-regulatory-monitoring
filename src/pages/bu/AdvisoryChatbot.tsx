@@ -119,11 +119,11 @@ export function AdvisoryChatbot({
     setCitations((c) => ({ ...c, [aiId]: answer.section }));
 
     const { text } = answer;
-    for (let i = 2; i <= text.length; i += 2) {
+    for (let i = 8; i <= text.length; i += 8) {
       if (!aliveRef.current) return;
       const slice = text.slice(0, i);
       setMessages((m) => m.map((x) => (x.id === aiId ? { ...x, text: slice } : x)));
-      await delay(12);
+      await delay(6);
     }
     if (!aliveRef.current) return;
     setMessages((m) => m.map((x) => (x.id === aiId ? { ...x, text } : x)));

@@ -13,6 +13,9 @@ import { useToast } from '../../context/ToastContext';
 import { formatDateTime } from '../../lib/format';
 import type { SupportRequestStatus } from '../../types';
 
+const EXAMPLE_RESPONSE =
+  'Thank you for raising this. Under REMIT II, intragroup transactions are not exempt from reporting — the exemption only applies where both counterparties are part of the same group and the transaction does not involve a third-party market participant. You will need to ensure all intragroup supply contracts between the trading desk and internal subsidiaries are captured in your trade reporting system. Please coordinate with your IT team to update the entity mapping before the 30 September 2026 deadline. Do not hesitate to raise a further request if you need support with the technical configuration.';
+
 const STATUS_TONE: Record<SupportRequestStatus, TagTone> = {
   Open: 'warning',
   Answered: 'success',
@@ -192,9 +195,18 @@ export default function SupportRequests() {
               </div>
             ) : (
               <div>
-                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                  Your response
-                </p>
+                <div className="mb-1 flex items-center justify-between">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    Your response
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setDraft(EXAMPLE_RESPONSE)}
+                    className="rounded-md border border-dashed border-slate-300 px-2 py-0.5 text-[11px] font-medium text-slate-500 transition-colors hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700"
+                  >
+                    Use example
+                  </button>
+                </div>
                 <textarea
                   value={draft}
                   rows={5}

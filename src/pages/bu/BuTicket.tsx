@@ -27,6 +27,15 @@ import { formatDate } from '../../lib/format';
 import { COMPLETED_STATES } from '../../lib/metrics';
 import type { RiskPriority } from '../../types';
 
+const EXAMPLE_MEASURE = {
+  description:
+    'Configured trade capture system to generate REMIT II-compliant transaction reports with all mandatory fields (contract type, counterparty LEI, delivery point, price and volume). Reports are submitted automatically to ACER\'s ARIS portal by 08:00 on T+1 for all standard contracts and orders.',
+  process: 'Transaction reporting — wholesale energy trades',
+  control: 'Automated T+1 REMIT II submission pipeline with pre-submission validation rules',
+  owner: 'Head of Wholesale Market Operations',
+  comments: 'UAT completed against 30 days of historical transactions. All validation checks passed.',
+};
+
 const EVIDENCE_PRESETS = [
   'RRM_Connectivity_Test.pdf',
   'T1_Reporting_Runbook.docx',
@@ -288,7 +297,22 @@ export default function BuTicket() {
         )}
 
         <div className="rounded-xl border border-slate-100 bg-slate-50/40 p-4">
-          <p className="mb-3 text-sm font-semibold text-slate-800">Add a compliance measure</p>
+          <div className="mb-3 flex items-center justify-between">
+            <p className="text-sm font-semibold text-slate-800">Add a compliance measure</p>
+            <button
+              type="button"
+              onClick={() => {
+                setMDescription(EXAMPLE_MEASURE.description);
+                setMProcess(EXAMPLE_MEASURE.process);
+                setMControl(EXAMPLE_MEASURE.control);
+                setMOwner(EXAMPLE_MEASURE.owner);
+                setMComments(EXAMPLE_MEASURE.comments);
+              }}
+              className="rounded-md border border-dashed border-slate-300 px-2 py-0.5 text-[11px] font-medium text-slate-500 transition-colors hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700"
+            >
+              Use example
+            </button>
+          </div>
           <div className="space-y-3">
             <label className="block">
               <FieldLabel>Implemented control description</FieldLabel>

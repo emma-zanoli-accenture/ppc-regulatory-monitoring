@@ -46,8 +46,8 @@ export const MONITORED_SOURCES: MonitoredSource[] = [
   { id: 'src-euoj', name: 'EU Official Journal', authority: 'Official Journal of the European Union' },
 ];
 
-/** The demo "today". Fixed for determinism; later mutated by Simulate Time. */
-const DEMO_TODAY = '2026-06-11';
+/** Returns today's real date as YYYY-MM-DD; mutated later by Simulate Time. */
+const today = () => new Date().toISOString().slice(0, 10);
 
 /** Presenter "simulate time" jumps, relative to the REMIT II implementation due date. */
 export type TimeJumpKey = 'T-30' | 'T-14' | 'T-7' | 'T+1';
@@ -162,7 +162,7 @@ function buildInitialState(): DemoState {
     evidence: structuredClone(seedEvidence),
     supportRequests: structuredClone(seedSupportRequests),
     auditTrail: structuredClone(seedAuditTrail),
-    currentDate: DEMO_TODAY,
+    currentDate: today(),
     activeJump: null,
     catalogue: [...INITIAL_CATALOGUE],
     sourceScanRun: false,

@@ -48,6 +48,14 @@ const SECTION_OPTIONS = [
   'Support & Escalation',
 ];
 
+const EXAMPLE_SUPPORT = {
+  subject: 'Scope of intragroup supply contracts under REMIT II reporting',
+  description:
+    'We need clarification on whether intragroup energy supply contracts between our trading desk and internal subsidiaries fall within the REMIT II reporting scope, or whether the intragroup exemption applies. This affects how we configure our trade capture system before the September deadline.',
+  section: 'What you need to do',
+  priority: 'High' as const,
+};
+
 function QuestionCard({
   icon: Icon,
   eyebrow,
@@ -439,10 +447,24 @@ export default function BuRegChangeDetail() {
         }
       >
         <div className="space-y-4">
-          <label className="block">
-            <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
               Subject
             </span>
+            <button
+              type="button"
+              onClick={() => {
+                setSubject(EXAMPLE_SUPPORT.subject);
+                setDescription(EXAMPLE_SUPPORT.description);
+                setSection(EXAMPLE_SUPPORT.section);
+                setPriority(EXAMPLE_SUPPORT.priority);
+              }}
+              className="rounded-md border border-dashed border-slate-300 px-2 py-0.5 text-[11px] font-medium text-slate-500 transition-colors hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700"
+            >
+              Use example
+            </button>
+          </div>
+          <label className="block">
             <input
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
