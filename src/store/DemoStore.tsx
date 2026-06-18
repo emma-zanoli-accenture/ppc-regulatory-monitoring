@@ -86,9 +86,6 @@ interface DemoState {
   communicationReports: Record<string, CommunicationReport>;
 }
 
-/** Ticket states that have not yet been notified — these advance on send. */
-const PRE_SEND_STATES: WorkflowState[] = ['Draft Communication', 'Ready to Send'];
-
 /** "Received but not started" states — entering measures moves these to In Progress. */
 const RECEIVED_STATES: WorkflowState[] = [
   'Notification Sent',
@@ -208,7 +205,24 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<DemoState>(buildInitialState);
 
   const runSourceScan = useCallback(() => {
-    setState((s) => (s.sourceScanRun ? s : { ...s, sourceScanRun: true }));
+    setState((s) => {
+      if (s.sourceScanRun) return s;
+      const entry: AuditTrailEntry = {
+        id: 'at-source-scan',
+        regChangeId: REMIT_II_ID,
+        timestamp: `${s.currentDate}T08:30:00`,
+        actor: 'AI Source Monitor',
+        action: 'Regulatory change detected',
+        detail: 'New REMIT II reporting requirements identified during ACER / EU REMIT source scan.',
+      };
+      return {
+        ...s,
+        sourceScanRun: true,
+        auditTrail: s.auditTrail.some((a) => a.id === entry.id)
+          ? s.auditTrail
+          : [...s.auditTrail, entry],
+      };
+    });
   }, []);
 
   const updateSourceCatalogue = useCallback(() => {
@@ -243,13 +257,23 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
         c.id === regChangeId ? { ...c, communicationStatus: 'Sent' as const } : c,
       );
 
-      // 2. Ensure each selected BU has a notified ticket (don't regress advanced ones).
+      // 2. Reset every selected-BU ticket to Notification Sent (fresh start on send).
       const existingByBu = new Map(
         s.tickets.filter((t) => t.regChangeId === regChangeId).map((t) => [t.businessUnit, t]),
       );
       const tickets = s.tickets.map((t): Ticket => {
-        if (t.regChangeId === regChangeId && selected.has(t.businessUnit) && PRE_SEND_STATES.includes(t.status)) {
-          return { ...t, status: 'Notification Sent' as const };
+        if (t.regChangeId === regChangeId && selected.has(t.businessUnit)) {
+          return {
+            ...t,
+            status: 'Notification Sent' as const,
+            viewed: false,
+            downloaded: false,
+            evidenceUploaded: false,
+            completedOn: null,
+            residualRisk: null,
+            complianceMeasures: [],
+            clarifications: [],
+          };
         }
         return t;
       });
@@ -271,12 +295,22 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      // 3. Append a send audit-trail entry (idempotent by id).
+      // Recompute implementation/audit status now that tickets are freshly reset.
+      const updatedChanges = recomputeChange(regulatoryChanges, tickets, regChangeId);
+
+      // 3. Purge stale seed entries for this change so the timeline stays coherent with the
+      //    freshly-reset tickets. Keep only entries added today (detection + catalogue from
+      //    the live demo run) and entries belonging to other regulatory changes.
+      const cleanTrail = s.auditTrail.filter(
+        (a) => a.regChangeId !== regChangeId || a.timestamp.startsWith(s.currentDate),
+      );
+
+      // Append a fresh send audit-trail entry.
       const entryId = `at-send-${regChangeId}`;
-      const auditTrail = s.auditTrail.some((a) => a.id === entryId)
-        ? s.auditTrail
+      const auditTrail = cleanTrail.some((a) => a.id === entryId)
+        ? cleanTrail
         : [
-            ...s.auditTrail,
+            ...cleanTrail,
             {
               id: entryId,
               regChangeId,
@@ -289,7 +323,7 @@ export function DemoStoreProvider({ children }: { children: ReactNode }) {
 
       return {
         ...s,
-        regulatoryChanges,
+        regulatoryChanges: updatedChanges,
         tickets,
         auditTrail,
         communicationReports: { ...s.communicationReports, [regChangeId]: report },
